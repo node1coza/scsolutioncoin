@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=4.0.0.4
+Name=SCSolutionCoin Core Client
+Comment=SCSolutionCoin Graphical UI
+Categories=Network;
+Exec=/usr/local/bin/scsolutioncoin
+Icon=/usr/share/pixmaps/scsolutioncoin.png
+Terminal=false
+Type=Application

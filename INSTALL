@@ -1,0 +1,9 @@
+Compiling / integration for SCSolutionCoin in to your Platform
+
+See doc/readme-qt.rst for instructions on building SCSolutionCoin QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of SCSolutionCoin.
+
+See doc/build-*.txt for instructions on building scsolutioncoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of SCSolutionCoin.
