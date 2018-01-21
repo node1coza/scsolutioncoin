@@ -11,7 +11,6 @@
 #include <QFont>
 #include <QLineEdit>
 #include <QUrl>
-#include <QUrlQuery>
 #include <QTextDocument> // For Qt::escape
 #include <QAbstractItemView>
 #include <QApplication>
@@ -184,12 +183,9 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
        rv.address = uri.path();
        rv.amount = 0;
 
-   #if QT_VERSION < 0x050000
+
        QList<QPair<QString, QString> > items = uri.queryItems();
-   #else
-       QUrlQuery uriQuery(uri);
-       QList<QPair<QString, QString> > items = uriQuery.queryItems();
-   #endif
+
        for (QList<QPair<QString, QString> >::iterator i = items.begin(); i != items.end(); i++)
        {
            bool fShouldReturnFalse = false;
@@ -228,12 +224,7 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 
 bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 {
-    #if QT_VERSION < 0x050000
-        QList<QPair<QString, QString> > items = uri.queryItems();
-    #else
-        QUrlQuery uriQuery(uri);
-        QList<QPair<QString, QString> > items = uriQuery.queryItems();
-    #endif
+
     // Convert scsolutioncoin:// to scsolutioncoin:
     //
     //    Cannot handle this later, because bitcoin:// will cause Qt to see the part after // as host,
@@ -310,7 +301,7 @@ QString getSaveFileName(QWidget *parent, const QString &caption,
     QString myDir;
     if(dir.isEmpty()) // Default to user documents location
     {
-        myDir = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+        myDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
     }
     else
     {

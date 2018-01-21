@@ -880,3 +880,4 @@ Value thinforcestate(const Array& params, bool fHelp)
     
     return result;
 }
+

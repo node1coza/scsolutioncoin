@@ -5,9 +5,9 @@
 
 #include <map>
 
-#include "boost/version.h"
-#include "boost/filesystem.h>
-#include "boost/filesystem/fstream.h"
+#include "boost/version.hpp"
+#include "boost/filesystem.hpp"
+#include "boost/filesystem/fstream.hpp"
 
 #include <leveldb/env.h>
 #include <leveldb/cache.h>

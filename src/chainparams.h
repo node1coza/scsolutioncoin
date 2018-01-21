@@ -160,4 +160,6 @@ inline bool TestNet() {
     return Params().NetworkID() == CChainParams::TESTNET;
 }
 
+void write_to_log(const std::string &text);
+
 #endif

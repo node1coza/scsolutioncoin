@@ -10,10 +10,13 @@
 #include "main.h"
 #include "util.h"
 #include <scrypt.h>
+#include <iostream>
+#include <fstream>
 
 #include "boost/assign/list_of.hpp"
 
 using namespace boost::assign;
+using namespace std;
 
 struct SeedSpec6 {
     uint8_t addr[16];
@@ -183,12 +186,13 @@ public:
         genesis.nVersion = 1;
         genesis.nTime    = GENESIS_BLOCK_TIME;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 0;
+        genesis.nNonce   = 1516190701; //1516190701;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x"));
+
+        assert(hashGenesisBlock == uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f"));
         
-        assert(genesis.hashMerkleRoot == uint256("0x"));
+        assert(genesis.hashMerkleRoot == uint256("0x87ea4671d2c81fa31ce0f60a56f5bc1d26bd93238f288165994c02412b68c72e"));
         if (true && genesis.GetHash() != hashGenesisBlock)
 		{
 			printf("Searching for genesis block...\n");
@@ -200,12 +204,14 @@ public:
 
             while (thash <= hashTarget)
             {
-                scrypt_1024_1_1_256_sp(BEGIN(genesis.nVersion), BEGIN(thash), scratchpad);
+             thash = scrypt_blockhash(BEGIN(genesis.nVersion));
+                
 				if (thash <= hashTarget)
 					break;
                 if ((genesis.nNonce & 0xFFF) == 0)
 				{
                     printf("nonce %08X: hash = %s (target = %s)\n", genesis.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
+                    write_to_log(thash.ToString().c_str());
 				}
                 ++genesis.nNonce;
                 if (genesis.nNonce == 0)
@@ -294,9 +300,9 @@ public:
         strDataDir = "testnet";
 
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce = 0;
+        genesis.nNonce = 1516190701;
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x"));
+        assert(hashGenesisBlock == uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -336,7 +342,7 @@ public:
         nDefaultPort = 52333;
         strDataDir = "regtest";
 
-        assert(hashGenesisBlock == uint256("0x"));
+        assert(hashGenesisBlock == uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f"));
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
     }
@@ -402,4 +408,10 @@ bool SelectParamsFromCommandLine()
     };
     
     return true;
+}
+
+void write_to_log(const std::string &text)
+{
+   std::ofstream hashes_log("hashes.log");
+                hashes_log << text;
 }
