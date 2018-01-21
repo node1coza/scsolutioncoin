@@ -1408,7 +1408,7 @@ build/rpcconsole.moc: ../scsolutioncoin/src/qt/rpcconsole.h \
 		../scsolutioncoin/src/addrman.h \
 		../scsolutioncoin/src/bloom.h \
 		../scsolutioncoin/src/scrypt.h \
-		../scsolutioncoin/build/ui_rpcconsole.h \
+		build/ui_rpcconsole.h \
 		../scsolutioncoin/src/qt/trafficgraphwidget.h \
 		../scsolutioncoin/src/qt/clientmodel.h \
 		../scsolutioncoin/src/qt/scicon.h \
@@ -1619,7 +1619,7 @@ build/alert.o: ../scsolutioncoin/src/alert.cpp ../scsolutioncoin/src/alert.h \
 
 build/version.o: ../scsolutioncoin/src/version.cpp ../scsolutioncoin/src/version.h \
 		../scsolutioncoin/src/clientversion.h \
-		../scsolutioncoin/src/build.h
+		build/build.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/version.o ../scsolutioncoin/src/version.cpp
 
 build/chainparams.o: ../scsolutioncoin/src/chainparams.cpp ../scsolutioncoin/src/chainparams.h \
@@ -3144,7 +3144,7 @@ build/addresstablemodel.o: ../scsolutioncoin/src/qt/addresstablemodel.cpp ../scs
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/addresstablemodel.o ../scsolutioncoin/src/qt/addresstablemodel.cpp
 
 build/coincontroldialog.o: ../scsolutioncoin/src/qt/coincontroldialog.cpp ../scsolutioncoin/src/qt/coincontroldialog.h \
-		../scsolutioncoin/build/ui_coincontroldialog.h \
+		build/ui_coincontroldialog.h \
 		../scsolutioncoin/src/qt/coincontroltreewidget.h \
 		../scsolutioncoin/src/qt/scsolutioncoinbridge.h \
 		../scsolutioncoin/src/init.h \
@@ -3203,7 +3203,7 @@ build/coincontroltreewidget.o: ../scsolutioncoin/src/qt/coincontroltreewidget.cp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/coincontroltreewidget.o ../scsolutioncoin/src/qt/coincontroltreewidget.cpp
 
 build/signverifymessagedialog.o: ../scsolutioncoin/src/qt/signverifymessagedialog.cpp ../scsolutioncoin/src/qt/signverifymessagedialog.h \
-		../scsolutioncoin/build/ui_signverifymessagedialog.h \
+		build/ui_signverifymessagedialog.h \
 		../scsolutioncoin/src/qt/qvalidatedlineedit.h \
 		../scsolutioncoin/src/qt/addressbookpage.h \
 		../scsolutioncoin/src/base58.h \
@@ -3256,14 +3256,14 @@ build/signverifymessagedialog.o: ../scsolutioncoin/src/qt/signverifymessagedialo
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/signverifymessagedialog.o ../scsolutioncoin/src/qt/signverifymessagedialog.cpp
 
 build/aboutdialog.o: ../scsolutioncoin/src/qt/aboutdialog.cpp ../scsolutioncoin/src/qt/aboutdialog.h \
-		../scsolutioncoin/build/ui_aboutdialog.h \
+		build/ui_aboutdialog.h \
 		../scsolutioncoin/src/qt/clientmodel.h \
 		../scsolutioncoin/src/version.h \
 		../scsolutioncoin/src/clientversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/aboutdialog.o ../scsolutioncoin/src/qt/aboutdialog.cpp
 
 build/editaddressdialog.o: ../scsolutioncoin/src/qt/editaddressdialog.cpp ../scsolutioncoin/src/qt/editaddressdialog.h \
-		../scsolutioncoin/build/ui_editaddressdialog.h \
+		build/ui_editaddressdialog.h \
 		../scsolutioncoin/src/qt/addresstablemodel.h \
 		../scsolutioncoin/src/qt/guiutil.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/editaddressdialog.o ../scsolutioncoin/src/qt/editaddressdialog.cpp
@@ -3586,7 +3586,7 @@ build/qvaluecombobox.o: ../scsolutioncoin/src/qt/qvaluecombobox.cpp ../scsolutio
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/qvaluecombobox.o ../scsolutioncoin/src/qt/qvaluecombobox.cpp
 
 build/askpassphrasedialog.o: ../scsolutioncoin/src/qt/askpassphrasedialog.cpp ../scsolutioncoin/src/qt/askpassphrasedialog.h \
-		../scsolutioncoin/build/ui_askpassphrasedialog.h \
+		build/ui_askpassphrasedialog.h \
 		../scsolutioncoin/src/qt/guiconstants.h \
 		../scsolutioncoin/src/qt/walletmodel.h \
 		../scsolutioncoin/src/allocators.h
@@ -3628,7 +3628,7 @@ build/rpcconsole.o: ../scsolutioncoin/src/qt/rpcconsole.cpp ../scsolutioncoin/sr
 		../scsolutioncoin/src/addrman.h \
 		../scsolutioncoin/src/bloom.h \
 		../scsolutioncoin/src/scrypt.h \
-		../scsolutioncoin/build/ui_rpcconsole.h \
+		build/ui_rpcconsole.h \
 		../scsolutioncoin/src/qt/trafficgraphwidget.h \
 		../scsolutioncoin/src/qt/clientmodel.h \
 		../scsolutioncoin/src/qt/scicon.h \
@@ -3948,7 +3948,7 @@ build/scsolutioncoinbridge.o: ../scsolutioncoin/src/qt/scsolutioncoinbridge.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/scsolutioncoinbridge.o ../scsolutioncoin/src/qt/scsolutioncoinbridge.cpp
 
 build/addressbookpage.o: ../scsolutioncoin/src/qt/addressbookpage.cpp ../scsolutioncoin/src/qt/addressbookpage.h \
-		../scsolutioncoin/build/ui_addressbookpage.h \
+		build/ui_addressbookpage.h \
 		../scsolutioncoin/src/qt/addresstablemodel.h \
 		../scsolutioncoin/src/qt/optionsmodel.h \
 		../scsolutioncoin/src/qt/scsolutioncoingui.h \
