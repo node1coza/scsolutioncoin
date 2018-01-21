@@ -39,7 +39,7 @@ int64_t CChainParams::GetProofOfWorkReward(int nHeight, int64_t nFees) const
     // miner's coin base reward
     int64_t nSubsidy = 0;
     
-    if (nHeight == 3)
+    if (nHeight == 5)
         nSubsidy =  500000000;
  //   else
  //   if (nHeight <= nDistributionFund)
@@ -166,7 +166,7 @@ public:
         nDefaultPort = 51332;
         nRPCPort = 51333;
         
-        nFirstPosv2Block = 5;
+        nFirstPosv2Block = 6;
         
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20); // "standard" scrypt target limit for proof of work, results with 0,000244140625 proof-of-work difficulty
         bnProofOfStakeLimit = CBigNum(~uint256(0) >> 20);
@@ -186,48 +186,16 @@ public:
         genesis.nVersion = 1;
         genesis.nTime    = GENESIS_BLOCK_TIME;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 1516190701; //1516190701;
+        LogPrintf("Genesis nBits:%s\n", genesis.nBits);
+        genesis.nNonce   = 1; //1516190701;
 
         hashGenesisBlock = genesis.GetHash();
-
-        assert(hashGenesisBlock == uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f"));
+        LogPrintf("Main Genesis:%s\n", hashGenesisBlock.ToString().c_str());
+        LogPrintf("Main Merkle:%s\n", genesis.hashMerkleRoot.ToString().c_str());
+        assert(hashGenesisBlock == uint256("0xe4cd1ef016e2164c0ed53f8c4621e0c4f666a3aae69a9a61d611596c666c6b71"));
         
         assert(genesis.hashMerkleRoot == uint256("0x87ea4671d2c81fa31ce0f60a56f5bc1d26bd93238f288165994c02412b68c72e"));
-        if (true && genesis.GetHash() != hashGenesisBlock)
-		{
-			printf("Searching for genesis block...\n");
-			// This will figure out a valid hash and Nonce if you're
-			// creating a different genesis block:
-            uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
-			uint256 thash;
-			char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
 
-            while (thash <= hashTarget)
-            {
-             thash = scrypt_blockhash(BEGIN(genesis.nVersion));
-                
-				if (thash <= hashTarget)
-					break;
-                if ((genesis.nNonce & 0xFFF) == 0)
-				{
-                    printf("nonce %08X: hash = %s (target = %s)\n", genesis.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
-                    write_to_log(thash.ToString().c_str());
-				}
-                ++genesis.nNonce;
-                if (genesis.nNonce == 0)
-				{
-					printf("NONCE WRAPPED, incrementing time\n");
-                    ++genesis.nTime;
-				}
-			}
-            printf("block.nTime = %u \n", genesis.nTime);
-            printf("block.nNonce = %u \n", genesis.nNonce);
-            printf("block.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-		  
-		}
-        genesis.print();
-        uint256 hash;
-        assert(hash == hashGenesisBlock);
 
         vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "scsolutioncoin.net"));
         
@@ -254,7 +222,7 @@ public:
         nFirstBlockHalve = 1022514; // + 1 year blocks average - 10k blockupdt x 20
         nFirstYearStake = 531257;  // 501257 blocks/year + 20k blocks(nov 30) + 10 k blocksupdate x 69
         
-        nLastPOWBlock = 4;
+        nLastPOWBlock = 5;
         nLastFairLaunchBlock = 30;
         nDistributionFund = 1;
     }
@@ -288,7 +256,7 @@ public:
         pchMessageStart[3] = 0x0f;
         
         
-        nFirstPosv2Block = 5;
+        nFirstPosv2Block = 6;
         
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16);
         bnProofOfStakeLimit = CBigNum(~uint256(0) >> 20);
@@ -300,9 +268,11 @@ public:
         strDataDir = "testnet";
 
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce = 1516190701;
+        genesis.nNonce = 1;
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f"));
+
+        assert(hashGenesisBlock == uint256("0xd9e7d5ccb2eeb4a49ba295d5df8f9552b0dbc97b71b9b81928bc30088d632c4b"));
+
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -337,12 +307,14 @@ public:
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 1);
         genesis.nTime = 1516190701;
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce = 2;
+        genesis.nNonce = 1;
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 52333;
         strDataDir = "regtest";
 
-        assert(hashGenesisBlock == uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f"));
+        assert(hashGenesisBlock == uint256("0x0df708752fed85dbaef77d779877e702f8617f8332c56a2480acc0474e6cb8db"));
+
+
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
     }
