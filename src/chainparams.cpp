@@ -186,10 +186,12 @@ public:
         genesis.nVersion = 1;
         genesis.nTime    = GENESIS_BLOCK_TIME;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 1516190701; //1516190701;
+        genesis.nNonce   = 0; //1516190701;
 
         hashGenesisBlock = genesis.GetHash();
-
+        //LogPrintf("genesis.BuildMerkleTree() = %s \n", genesis.BuildMerkleTree().ToString().c_str());
+        //LogPrintf("Genesis.getHash() = %s \n", genesis.GetHash().ToString().c_str());
+        //LogPrintf(" A:%s\n B:%d\n", hashGenesisBlock.ToString().c_str(), uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f").ToString().c_str());
         assert(hashGenesisBlock == uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f"));
         
         assert(genesis.hashMerkleRoot == uint256("0x87ea4671d2c81fa31ce0f60a56f5bc1d26bd93238f288165994c02412b68c72e"));
@@ -266,9 +268,11 @@ public:
         strDataDir = "testnet";
 
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce = 1516190701;
+        genesis.nNonce = 0;
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f"));
+        //LogPrintf("Testnet Genesis.getHash() = %s \n", genesis.GetHash().ToString().c_str());
+        //LogPrintf(" TestnetA:%s\n TestnetB:%d\n", hashGenesisBlock.ToString().c_str(), uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f").ToString().c_str());
+        assert(hashGenesisBlock == uint256("0x291f4148480c7426b2fef13c37fe6a9404ea0bc8df3d1d99f7ae2c506fbe7f8c"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -303,12 +307,13 @@ public:
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 1);
         genesis.nTime = 1516190701;
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce = 2;
+        genesis.nNonce = 0;
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 52333;
         strDataDir = "regtest";
-
-        assert(hashGenesisBlock == uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f"));
+        //LogPrintf("Regtest Genesis.getHash() = %s \n", genesis.GetHash().ToString().c_str());
+        //LogPrintf(" RegTestA:%s\n RegTestB:%d\n", hashGenesisBlock.ToString().c_str(), uint256("0xb91368e61be846b46b73aaf60d57773355206959d39687065a35209de4ca998f").ToString().c_str());
+        assert(hashGenesisBlock == uint256("0x676f3e112bdba6f49722c1d90933cf241b053d4899ece42effeb330e3780404b"));
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
     }
