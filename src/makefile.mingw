@@ -5,21 +5,21 @@
 USE_UPNP:=0
 
 INCLUDEPATHS= \
- -I"C:\boost-1.50.0-mgw" \
- -I"C:\db-4.8.30.NC-mgw\build_unix" \
- -I"C:\openssl-1.0.1c-mgw\include"
+ -I"C:\deps\boost_1_55_0" \
+ -I"C:\deps\db-5.3.28\build_windows" \
+ -I"C:\deps\openssl-1.0.1j\include"
 
 LIBPATHS= \
- -L"C:\boost-1.50.0-mgw\stage\lib" \
- -L"C:\db-4.8.30.NC-mgw\build_unix" \
- -L"C:\openssl-1.0.1c-mgw"
+ -L"C:\deps\boost_1_55_0\stage\lib" \
+ -L"C:\deps\db-5.3.28\build_windows" \
+ -L"C:\deps\openssl-1.0.1j"
 
 LIBS= \
- -l boost_system-mgw44-mt-1_53 \
- -l boost_filesystem-mgw44-mt-1_53 \
- -l boost_program_options-mgw44-mt-1_53 \
- -l boost_thread-mgw44-mt-1_53 \
- -l boost_chrono-mgw44-mt-1_53 \
+ -l boost_system-mgw48-mt-s-1_55 \
+ -l boost_filesystem-mgw48-mt-s-1_55 \
+ -l boost_program_options-mgw48-mt-s-1_55 \
+ -l boost_thread-mgw48-mt-s-1_55 \
+ -l boost_chrono-mgw48-mt-s-1_55 \
  -l db_cxx \
  -l ssl \
  -l crypto
@@ -35,8 +35,8 @@ ifndef USE_UPNP
 	override USE_UPNP = -
 endif
 ifneq (${USE_UPNP}, -)
- INCLUDEPATHS += -I"C:\miniupnpc-1.6-mgw"
- LIBPATHS += -L"C:\miniupnpc-1.6-mgw"
+ INCLUDEPATHS += -I"C:\deps\miniupnpc"
+ LIBPATHS += -L"C:\deps\miniupnpc"
  LIBS += -l miniupnpc -l iphlpapi
  DEFS += -DSTATICLIB -DUSE_UPNP=$(USE_UPNP)
 endif
@@ -47,49 +47,43 @@ LIBS += -l kernel32 -l user32 -l gdi32 -l comdlg32 -l winspool -l winmm -l shell
 HEADERS = $(wildcard *.h)
 
 OBJS= \
-    obj/alert.o \
-    obj/version.o \
-    obj/checkpoints.o \
-    obj/netbase.o \
     obj/addrman.o \
+    obj/alert.o \
+    obj/bloom.o \
+    obj/chainparams.o \
+    obj/checkpoints.o \
+    obj/core.o \
     obj/crypter.o \
-    obj/key.o \
     obj/db.o \
+    obj/eckey.o \
+    obj/hash.o \
     obj/init.o \
     obj/irc.o \
+    obj/kernel.o \
+    obj/key.o \
     obj/keystore.o \
     obj/main.o \
     obj/miner.o \
-    obj/net.o \
-    obj/protocol.o \
-    obj/bitcoinrpc.o \
-    obj/rpcdump.o \
-    obj/rpcnet.o \
-    obj/rpcmining.o \
-    obj/rpcwallet.o \
-    obj/rpcblockchain.o \
-    obj/rpcrawtransaction.o \
-    obj/script.o \
-    obj/sync.o \
-    obj/util.o \
-    obj/wallet.o \
-    obj/walletdb.o \
-    obj/noui.o \
-    obj/kernel.o \
+    obj/net.o    \
+    obj/netbase.o \
     obj/pbkdf2.o \
+    obj/protocol.o \
+    obj/ringsig.o \
+    obj/rpcclient.o \
+    obj/rpcprotocol.o \
+    obj/rpcserver.o \
+    obj/script.o \
     obj/scrypt.o \
-    obj/scrypt-x86.o \
-    obj/scrypt-x86_64.o \
-    obj/zerocoin/Accumulator.o \
-    obj/zerocoin/AccumulatorProofOfKnowledge.o \
-    obj/zerocoin/Coin.o \
-    obj/zerocoin/CoinSpend.o \
-    obj/zerocoin/Commitment.o \
-    obj/zerocoin/ParamGeneration.o \
-    obj/zerocoin/Params.o \
-    obj/zerocoin/SerialNumberSignatureOfKnowledge.o \
-    obj/zerocoin/SpendMetaData.o \
-    obj/zerocoin/ZeroTest.o
+    obj/smessage.o \
+    obj/state.o \
+    obj/stealth.o \
+    obj/sync.o \
+    obj/txdb-leveldb.o \
+    obj/txmempool.o \
+    obj/util.o \
+    obj/version.o \
+    obj/wallet.o \
+    obj/walletdb.o 
 
 all: scsolutioncoind.exe
 
@@ -98,7 +92,7 @@ DEFS += $(addprefix -I,$(CURDIR)/leveldb/include)
 DEFS += $(addprefix -I,$(CURDIR)/leveldb/helpers)
 OBJS += obj/txdb-leveldb.o
 leveldb/libleveldb.a:
-	cd leveldb; make; cd ..
+#	cd leveldb; make libleveldb.a; cd ..
 obj/txdb-leveldb.o: leveldb/libleveldb.a
 
 obj/%.o: %.h $(HEADERS)

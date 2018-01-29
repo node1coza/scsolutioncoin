@@ -32,6 +32,7 @@ static leveldb::Options GetOptions()
     options.block_cache = leveldb::NewLRUCache(nCacheSizeMB * 1048576);
     options.filter_policy = leveldb::NewBloomFilterPolicy(10);
     return options;
+
 }
 
 void init_blockindex(leveldb::Options& options, bool fRemoveOld = false)

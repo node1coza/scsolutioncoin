@@ -1,18 +1,18 @@
 TEMPLATE = app
-TARGET = scsolutioncoin-qt-linux
+TARGET = scsolutioncoin-qt
 VERSION = 1.0.0.0
 INCLUDEPATH += src src/json src/qt
 DEFINES += BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
+CONFIG += static
+CONFIG += static-runtime
 CONFIG += thread
 # CONFIG += static
 # LIBS += -L"c:/" -llibeay32
-
+QT += webkit webkitwidgets
 # Mobile devices
-android:ios{
-    CONFIG += mobility
-    MOBILITY =
-}
+#INCLUDEPATH += "C:/Qt/Qt5.2.1-mingw/Tools/mingw48_32/lib/gcc/i686-w64-mingw32/4.8.0/include/c++/tr1/"
+#INCLUDEPATH += C:/Qt/Qt5.2.1-mingw/Tools/mingw48_32/lib/gcc/i686-w64-mingw32/4.8.0/include/c++/i686-w64-mingw32/
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0
@@ -28,68 +28,36 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 #    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,
 #    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
 
-OBJECTS_DIR = build
-MOC_DIR = build
-UI_DIR = build
 
-android {
-    INCLUDEPATH += src/qt/android
 
-    QT += androidextras
 
-    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-
-    OTHER_FILES +=
-
-    HEADERS +=
-    SOURCES +=
-
-    OBJECTS_DIR = build-android
-    MOC_DIR = build-android
-    UI_DIR = build-android
-} else {
-
-    QT += widgets webkitwidgets
-}
     RESOURCES = scsolutioncoin.qrc
 
-build_macosx64 {
-    QMAKE_TARGET_BUNDLE_PREFIX = co.scsolutioncoin
-    BOOST_LIB_SUFFIX=-mt
-    BOOST_INCLUDE_PATH=/usr/local/Cellar/boost/1.65.1/include
-    BOOST_LIB_PATH=/usr/local/Cellar/boost/1.65.1/lib
 
-    BDB_INCLUDE_PATH=/usr/local/Cellar/berkeley-db@4/4.8.30/include
-    BDB_LIB_PATH=/usr/local/Cellar/berkeley-db@4/4.8.30/lib
+    BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
+    BOOST_INCLUDE_PATH=C:/deps/boost_1_55_0
+    BOOST_LIB_PATH=C:/deps/boost_1_55_0
 
-    OPENSSL_INCLUDE_PATH=/usr/local/Cellar/openssl/1.0.2l/include
-    OPENSSL_LIB_PATH=/usr/local/Cellar/openssl/1.0.2l/lib
+    BDB_INCLUDE_PATH=C:/deps/db-5.3.28/build_unix/
+    BDB_LIB_PATH=C:/deps/db-5.3.28/build_unix/
+    OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1j/include
+    OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1j
 
-    MINIUPNPC_INCLUDE_PATH=/usr/local/Cellar/miniupnpc/2.0.20170509/include
-    MINIUPNPC_LIB_PATH=/usr/local/Cellar/miniupnpc/2.0.20170509/lib
-
-    QMAKE_CXXFLAGS += -arch x86_64 -stdlib=libc++
-    QMAKE_CFLAGS += -arch x86_64
-    QMAKE_LFLAGS += -arch x86_64 -stdlib=libc++
-}
-build_win32 {
-    BOOST_LIB_SUFFIX=-mgw48-mt-s-1_55
-    BOOST_INCLUDE_PATH=c:/deps/boost/include
-    BOOST_LIB_PATH=c:/deps/boost/lib
-
-    BDB_INCLUDE_PATH=c:/deps/db-4.8.30.NC/build_unix
-    BDB_LIB_PATH=c:/deps/db-4.8.30.NC/build_unix
-    OPENSSL_INCLUDE_PATH=c:/deps/openssl_1.0.1h/include
-    OPENSSL_LIB_PATH=c:/deps/openssl_1.0.1h/lib/
-
-    MINIUPNPC_INCLUDE_PATH=c:/deps/miniupnpc
+    MINIUPNPC_INCLUDE_PATH=c:/deps
     MINIUPNPC_LIB_PATH=c:/deps/miniupnpc
+    QRENCODE_INCLUDE_PATH=c:/deps/qrencode-3.4.4
+    QRENCODE_LIB_PATH=c:/deps/qrencode-3.4.4/.libs
 
         #USE_BUILD_INFO = 1
         DEFINES += HAVE_BUILD_INFO
 
     #USE_UPNP=-
-}
+
+
+
+OBJECTS_DIR = build
+MOC_DIR = build
+UI_DIR = build
 
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
@@ -105,14 +73,15 @@ contains(RELEASE, 1) {
 
 !win32 {
 # for extra security against potential buffer overflows: enable GCCs Stack Smashing Protection
-QMAKE_CXXFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
-QMAKE_LFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
+QMAKE_CXXFLAGS *= -fstack-protector-all
+QMAKE_LFLAGS *= -fstack-protector-all
 # We need to exclude this for Windows cross compile with MinGW 4.2.x, as it will result in a non-working executable!
 # This can be enabled for Windows, when we switch to MinGW >= 4.4.x.
 }
 # for extra security on Windows: enable ASLR and DEP via GCC linker flags
 win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat
-#win32:QMAKE_LFLAGS += -static-libgcc -static-libstdc++
+win32:QMAKE_FLAGS *= -W1, --large-address-aware -static
+win32:QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 
 # use: qmake "USE_UPNP=1" ( enabled by default; default)
 #  or: qmake "USE_UPNP=0" (disabled by default)
@@ -125,7 +94,8 @@ contains(USE_UPNP, -) {
     count(USE_UPNP, 0) {
         USE_UPNP=1
     }
-    DEFINES += USE_UPNP=$$USE_UPNP STATICLIB
+
+    DEFINES += USE_UPNP=$$USE_UPNP STATICLIB MINIUPNP_STATICLIB
     INCLUDEPATH += $$MINIUPNPC_INCLUDE_PATH
     LIBS += $$join(MINIUPNPC_LIB_PATH,,-L,) -lminiupnpc
     win32:LIBS += -liphlpapi
@@ -159,8 +129,9 @@ SOURCES += src/txdb-leveldb.cpp
         QMAKE_RANLIB = $$replace(QMAKE_STRIP, strip, ranlib)
     }
     LIBS += -lshlwapi
-    genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libleveldb.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libmemenv.a
+    #genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libleveldb.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libmemenv.a
 }
+    #genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libleveldb.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libmemenv.a
 genleveldb.target = $$PWD/src/leveldb/libleveldb.a
 genleveldb.depends = FORCE
 PRE_TARGETDEPS += $$PWD/src/leveldb/libleveldb.a
@@ -192,6 +163,9 @@ contains(USE_O3, 1) {
     QMAKE_CXXFLAGS += -msse2
     QMAKE_CFLAGS += -msse2
 }
+
+    QMAKE_CXXFLAGS += -DMINIUPNPC_STATICLIB
+    QMAKE_CFLAGS += -DMINIUPNPC_STATICLIB
 
 QMAKE_CXXFLAGS_WARN_ON = -fdiagnostics-show-option -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter -Wstack-protector
 
@@ -409,7 +383,7 @@ OTHER_FILES += \
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
     macx:BOOST_LIB_SUFFIX = -mt
-    windows:BOOST_LIB_SUFFIX = -mt
+   # windows:BOOST_LIB_SUFFIX = -mt
 }
 
 isEmpty(BOOST_THREAD_LIB_SUFFIX) {
@@ -482,11 +456,29 @@ macx:QMAKE_CXXFLAGS_THREAD += -pthread
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
 INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH
 LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,)
-LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
+LIBS += -lssl -lcrypto -ldb_cxx
 # -lgdi32 has to happen after -lcrypto (see  #681)
 windows:LIBS += -lws2_32 -lshlwapi -lmswsock -lole32 -loleaut32 -luuid -lgdi32
-LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
-windows:LIBS += -lboost_chrono$$BOOST_LIB_SUFFIX
+#LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
+#windows:LIBS += -lboost_chrono$$BOOST_LIB_SUFFIX
+
+win32-g++* {
+  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_chrono-mgw49-mt-s-1_55.a -lboost_chrono$$BOOST_LIB_SUFFIX
+  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_chrono-mgw49-mt-s-1_55.a -lboost_chrono$$BOOST_LIB_SUFFIX
+
+  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_filesystem-mgw49-mt-s-1_55.a -lboost_filesystem$$BOOST_LIB_SUFFIX
+  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_filesystem-mgw49-mt-s-1_55.a -lboost_filesystem$$BOOST_LIB_SUFFIX
+
+  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_program_options-mgw49-mt-s-1_55.a -lboost_program_options$$BOOST_LIB_SUFFIX
+  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_program_options-mgw49-mt-s-1_55.a -lboost_program_options$$BOOST_LIB_SUFFIX
+
+  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_system-mgw49-mt-s-1_55.a -lboost_system$$BOOST_LIB_SUFFIX
+  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_system-mgw49-mt-s-1_55.a -lboost_system$$BOOST_LIB_SUFFIX
+
+  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_thread-mgw49-mt-s-1_55.a -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
+  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_thread-mgw49-mt-s-1_55.a -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
+}
+
 
 contains(RELEASE, 1) {
     !windows:!macx {
@@ -500,4 +492,4 @@ contains(RELEASE, 1) {
     LIBS += -lrt -ldl
 }
 
-system($$QMAKE_LRELEASE -silent $$_PRO_FILE_)
+system($$QMAKE_LRELEASE $$_PRO_FILE_)
