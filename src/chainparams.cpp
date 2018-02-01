@@ -198,6 +198,14 @@ public:
 
 
         vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.189"));
+        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.199"));
+        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.200"));
+        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.168"));
+        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.201"));
+        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.196"));
+        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.115"));
+        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.203"));
+        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.202"));
 
         
         base58Prefixes[PUBKEY_ADDRESS] = list_of(25)                    .convert_to_container<std::vector<unsigned char> >();
