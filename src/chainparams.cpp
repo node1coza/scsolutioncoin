@@ -40,7 +40,7 @@ int64_t CChainParams::GetProofOfWorkReward(int nHeight, int64_t nFees) const
     int64_t nSubsidy = 0;
     
     if (nHeight == 5)
-        nSubsidy =  500000000;
+        nSubsidy =  500000000 * COIN;
  //   else
  //   if (nHeight <= nDistributionFund)
 //        nSubsidy = 2691000 * COIN;
@@ -186,19 +186,19 @@ public:
         genesis.nVersion = 1;
         genesis.nTime    = GENESIS_BLOCK_TIME;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        LogPrintf("Genesis nBits:%s\n", genesis.nBits);
+        //LogPrintf("Genesis nBits:%s\n", genesis.nBits);
         genesis.nNonce   = 1; //1516190701;
 
         hashGenesisBlock = genesis.GetHash();
-        LogPrintf("Main Genesis:%s\n", hashGenesisBlock.ToString().c_str());
-        LogPrintf("Main Merkle:%s\n", genesis.hashMerkleRoot.ToString().c_str());
+        //LogPrintf("Main Genesis:%s\n", hashGenesisBlock.ToString().c_str());
+        //LogPrintf("Main Merkle:%s\n", genesis.hashMerkleRoot.ToString().c_str());
         assert(hashGenesisBlock == uint256("0xe4cd1ef016e2164c0ed53f8c4621e0c4f666a3aae69a9a61d611596c666c6b71"));
         
         assert(genesis.hashMerkleRoot == uint256("0x87ea4671d2c81fa31ce0f60a56f5bc1d26bd93238f288165994c02412b68c72e"));
 
 
-        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "scsolutioncoin.net"));
-        
+        vSeeds.push_back(CDNSSeedData("scsolutioncoin.net", "160.119.100.189"));
+
         
         base58Prefixes[PUBKEY_ADDRESS] = list_of(25)                    .convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[SCRIPT_ADDRESS] = list_of(26)                   .convert_to_container<std::vector<unsigned char> >();
