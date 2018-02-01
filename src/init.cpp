@@ -852,7 +852,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     switch (LoadBlockIndex())
     {
         case 1:
-            return InitError(_("Error loading blkindex.dat"));
+            return InitError(_("blkindex.dat created. Please restart the application"));
         case 2:
             if (nNodeMode == NT_FULL)
             {

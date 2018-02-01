@@ -5,7 +5,8 @@ INCLUDEPATH += src src/json src/qt
 DEFINES += BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
 CONFIG += static
-CONFIG += static-runtime
+CONFIG += static_runtime
+
 CONFIG += thread
 # CONFIG += static
 # LIBS += -L"c:/" -llibeay32
@@ -29,10 +30,40 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 #    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
 
 
-
+linux {
 
     RESOURCES = scsolutioncoin.qrc
+    LIBS += -lboost_system
+    LIBS += -lboost_thread
+    LIBS += -lboost_filesystem
+    LIBS += -lboost_system
+    LIBS += -lboost_chrono
+    LIBS += -lboost_program_options
 
+    #BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
+    #BOOST_INCLUDE_PATH=/usr/include/boost
+    #BOOST_LIB_PATH=/usr/lib/x86_64-linux-gnu
+
+    BDB_INCLUDE_PATH=/usr/include
+    BDB_LIB_PATH=/usr/lib/x86_64-linux-gnu
+    OPENSSL_INCLUDE_PATH=usr/include/openssl
+    OPENSSL_LIB_PATH=/usr/lib/x86_64-linux-gnu/openssl-1.0.0
+
+    MINIUPNPC_INCLUDE_PATH=/usr/include/miniupnpc
+    MINIUPNPC_LIB_PATH=/usr/lib/x86_64-linux-gnu
+    QRENCODE_INCLUDE_PATH=/usr/include
+    QRENCODE_LIB_PATH=/usr/lib/x86_64-linux-gnu
+
+        #USE_BUILD_INFO = 1
+        DEFINES += HAVE_BUILD_INFO
+
+    #USE_UPNP=-
+}
+
+
+!linux {
+
+    RESOURCES = scsolutioncoin.qrc
 
     BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
     BOOST_INCLUDE_PATH=C:/deps/boost_1_55_0
@@ -52,7 +83,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
         DEFINES += HAVE_BUILD_INFO
 
     #USE_UPNP=-
-
+}
 
 
 OBJECTS_DIR = build
@@ -382,12 +413,12 @@ OTHER_FILES += \
 
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
-    macx:BOOST_LIB_SUFFIX = -mt
+   # macx:BOOST_LIB_SUFFIX = -mt
    # windows:BOOST_LIB_SUFFIX = -mt
 }
 
 isEmpty(BOOST_THREAD_LIB_SUFFIX) {
-    BOOST_THREAD_LIB_SUFFIX = $$BOOST_LIB_SUFFIX
+    #BOOST_THREAD_LIB_SUFFIX = $$BOOST_LIB_SUFFIX
 }
 
 isEmpty(BDB_LIB_PATH) {
