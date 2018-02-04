@@ -25,7 +25,7 @@ namespace Checkpoints
     //
     MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
-    //    ( 0,        uint256("0x0000046309984501e5e724498cddb4aff41a126927355f64b44f1b8bba4f447e") ) // Params().HashGenesisBlock())
+        ( 0,        uint256("0xe4cd1ef016e2164c0ed53f8c4621e0c4f666a3aae69a9a61d611596c666c6b71") ) // Params().HashGenesisBlock())
     //    ( 6900,     uint256("0x00000000007ab23f193e14dce62f4e7713b15e9fc7555ee82188d126abbe2c2f") )
     //    ( 69000,    uint256("0x2145ba590371077d372550850c81a4db38e8bc026e500cfe0a20e8859485dcc3") )
     //    ( 88888,    uint256("0xbe44edfa112d8cc3fcabd873a2fb4f606310f57ce1c7f7630db790ed0dbd325e") )
