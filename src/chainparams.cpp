@@ -39,8 +39,17 @@ int64_t CChainParams::GetProofOfWorkReward(int nHeight, int64_t nFees) const
     // miner's coin base reward
     int64_t nSubsidy = 0;
     
-    if (nHeight == 5)
-        nSubsidy =  500000000 * COIN;
+    if (nHeight == 8)
+        nSubsidy =  100000000 * COIN;
+    if (nHeight == 12)
+        nSubsidy =  100000000 * COIN;
+    if (nHeight == 15)
+        nSubsidy =  100000000 * COIN;
+    if (nHeight == 18)
+        nSubsidy =  100000000 * COIN;
+    if (nHeight == 21)
+        nSubsidy =  100000000 * COIN;
+
  //   else
  //   if (nHeight <= nDistributionFund)
 //        nSubsidy = 2691000 * COIN;
@@ -166,7 +175,7 @@ public:
         nDefaultPort = 51332;
         nRPCPort = 51333;
         
-        nFirstPosv2Block = 6;
+        nFirstPosv2Block = 20;
         
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20); // "standard" scrypt target limit for proof of work, results with 0,000244140625 proof-of-work difficulty
         bnProofOfStakeLimit = CBigNum(~uint256(0) >> 20);
@@ -230,7 +239,7 @@ public:
         nFirstBlockHalve = 1022514; // + 1 year blocks average - 10k blockupdt x 20
         nFirstYearStake = 531257;  // 501257 blocks/year + 20k blocks(nov 30) + 10 k blocksupdate x 69
         
-        nLastPOWBlock = 5;
+        nLastPOWBlock = 25;
         nLastFairLaunchBlock = 30;
         nDistributionFund = 1;
     }
