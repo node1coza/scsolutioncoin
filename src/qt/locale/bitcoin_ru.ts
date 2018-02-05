@@ -2663,8 +2663,8 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     </message>
     <message>
         <location line="+6"/>
-        <source>Listen for connections on &lt;port&gt; (default: 51332 or testnet: 52332)</source>
-        <translation>Принимать входящие подключения на &lt;port&gt; (по умолчанию: 51332 или 52332 в тестовой сети)</translation>
+        <source>Listen for connections on &lt;port&gt; (default: 51332 or testnet: 51333)</source>
+        <translation>Принимать входящие подключения на &lt;port&gt; (по умолчанию: 51332 или 51333 в тестовой сети)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2723,8 +2723,8 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     </message>
     <message>
         <location line="-87"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 51333 or testnet: 52333)</source>
-        <translation>Прослушивать подключения JSON-RPC на &lt;порту&gt; (по умолчанию: 51333 или для testnet: 52333)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 52332 or testnet: 52333)</source>
+        <translation>Прослушивать подключения JSON-RPC на &lt;порту&gt; (по умолчанию: 52332 или для testnet: 52333)</translation>
     </message>
     <message>
         <location line="-11"/>

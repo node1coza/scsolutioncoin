@@ -65,7 +65,7 @@
 
 extern CWallet* pwalletMain;
 double GetPoSKernelPS();
-
+QTimer *timerStakingIcon = new QTimer();
 
 SCSolutionCoinGUI::SCSolutionCoinGUI(QWidget *parent):
     QMainWindow(parent),
@@ -155,7 +155,10 @@ SCSolutionCoinGUI::~SCSolutionCoinGUI()
     if(trayIcon) // Hide tray icon, as deleting will let it linger until quit (on Ubuntu)
         trayIcon->hide();
 
+
     delete webView;
+
+
 #ifdef Q_OS_MAC
     delete appMenuBar;
 #endif
@@ -165,12 +168,14 @@ void SCSolutionCoinGUI::pageLoaded(bool ok)
 {
     if (GetBoolArg("-staking", true))
     {
-        QTimer *timerStakingIcon = new QTimer(this);
+
         connect(timerStakingIcon, SIGNAL(timeout()), this, SLOT(updateStakingIcon()));
         timerStakingIcon->start(15 * 1000);
         updateStakingIcon();
     }
 }
+
+
 
 void SCSolutionCoinGUI::addJavascriptObjects()
 {
@@ -618,17 +623,22 @@ void SCSolutionCoinGUI::changeEvent(QEvent *e)
 
 void SCSolutionCoinGUI::closeEvent(QCloseEvent *event)
 {
-    if(clientModel)
-    {
-#ifndef Q_OS_MAC // Ignored on Mac
-        if(!clientModel->getOptionsModel()->getMinimizeToTray() &&
-           !clientModel->getOptionsModel()->getMinimizeOnClose())
+
+
+
+        if(clientModel)
         {
-            qApp->quit();
+        #ifndef Q_OS_MAC // Ignored on Mac
+                if(!clientModel->getOptionsModel()->getMinimizeToTray() &&
+                   !clientModel->getOptionsModel()->getMinimizeOnClose())
+                {
+                    //int EXIT_FAILURE;
+                    qApp->exit(EXIT_FAILURE);
+                }
+        #endif
         }
-#endif
-    }
-    QMainWindow::closeEvent(event);
+        QMainWindow::closeEvent(event);
+
 }
 
 void SCSolutionCoinGUI::askFee(qint64 nFeeRequired, bool *payFee)
@@ -1023,4 +1033,5 @@ void SCSolutionCoinGUI::detectShutdown()
 {
     if (ShutdownRequested())
         QMetaObject::invokeMethod(QCoreApplication::instance(), "quit", Qt::QueuedConnection);
+
 }

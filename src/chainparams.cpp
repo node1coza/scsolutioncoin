@@ -73,6 +73,7 @@ int64_t CChainParams::GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees) con
 {
 	//if (nHeight == 1)
 	//	nSubsidy = 500000000 * COIN;
+
 	
     // miner's coin stake reward based on coin age spent (coin-days)
     int64_t nSubsidy = nCoinAge * ZCOIN_YEAR_REWARD * 33 / (365 * 33 + 8);
@@ -175,7 +176,7 @@ public:
         nDefaultPort = 51332;
         nRPCPort = 52332;
         
-        nFirstPosv2Block = 70;
+        nFirstPosv2Block = 69;
         
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20); // "standard" scrypt target limit for proof of work, results with 0,000244140625 proof-of-work difficulty
         bnProofOfStakeLimit = CBigNum(~uint256(0) >> 20);

@@ -1,19 +1,14 @@
 TEMPLATE = app
-TARGET = scsolutioncoin-1.0.0-qt-linux
+TARGET = scsolutioncoin-1.0.0-qt
 VERSION = 1.0.0.0
 INCLUDEPATH += src src/json src/qt
 DEFINES += BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
-CONFIG += static
-CONFIG += static_runtime
-
 CONFIG += thread
 # CONFIG += static
-# LIBS += -L"c:/" -llibeay32
-QT += webkit webkitwidgets
-# Mobile devices
-#INCLUDEPATH += "C:/Qt/Qt5.2.1-mingw/Tools/mingw48_32/lib/gcc/i686-w64-mingw32/4.8.0/include/c++/tr1/"
-#INCLUDEPATH += C:/Qt/Qt5.2.1-mingw/Tools/mingw48_32/lib/gcc/i686-w64-mingw32/4.8.0/include/c++/i686-w64-mingw32/
+# LIBS += -llibeay32
+QT += widgets webkitwidgets
+#QT -= declarative doc enginio graphicaleffects imageformats macextras multimedia quick1 quickcontrols script sensors serialport svg translations wayland webchannel webengine websockets winextras connectivity androidextras x11extras bluetooth activeqt location xmlpatterns
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0
@@ -29,48 +24,20 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 #    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,
 #    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
 
+OBJECTS_DIR = build
+MOC_DIR = build
+UI_DIR = build
 
-linux {
 
     RESOURCES = scsolutioncoin.qrc
-    LIBS += -lboost_system
-    LIBS += -lboost_thread
-    LIBS += -lboost_filesystem
-    LIBS += -lboost_system
-    LIBS += -lboost_chrono
-    LIBS += -lboost_program_options
 
-    #BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
-    #BOOST_INCLUDE_PATH=/usr/include/boost
-    #BOOST_LIB_PATH=/usr/lib/x86_64-linux-gnu
-
-    BDB_INCLUDE_PATH=/usr/include
-    BDB_LIB_PATH=/usr/lib/x86_64-linux-gnu
-    OPENSSL_INCLUDE_PATH=usr/include/openssl
-    OPENSSL_LIB_PATH=/usr/lib/x86_64-linux-gnu/openssl-1.0.0
-
-    MINIUPNPC_INCLUDE_PATH=/usr/include/miniupnpc
-    MINIUPNPC_LIB_PATH=/usr/lib/x86_64-linux-gnu
-    QRENCODE_INCLUDE_PATH=/usr/include
-    QRENCODE_LIB_PATH=/usr/lib/x86_64-linux-gnu
-
-        #USE_BUILD_INFO = 1
-        DEFINES += HAVE_BUILD_INFO
-
-    #USE_UPNP=-
-}
-
-
-!linux {
-
-    RESOURCES = scsolutioncoin.qrc
 
     BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
     BOOST_INCLUDE_PATH=C:/deps/boost_1_55_0
-    BOOST_LIB_PATH=C:/deps/boost_1_55_0
+    BOOST_LIB_PATH=C:/deps/boost_1_55_0/stage/lib
 
-    BDB_INCLUDE_PATH=C:/deps/db-5.3.28/build_unix/
-    BDB_LIB_PATH=C:/deps/db-5.3.28/build_unix/
+    BDB_INCLUDE_PATH=C:/deps/db-4.8.30.NC/build_unix
+    BDB_LIB_PATH=C:/deps/db-4.8.30.NC/build_unix
     OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1j/include
     OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1j
 
@@ -83,12 +50,10 @@ linux {
         DEFINES += HAVE_BUILD_INFO
 
     #USE_UPNP=-
-}
 
 
-OBJECTS_DIR = build
-MOC_DIR = build
-UI_DIR = build
+
+
 
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
@@ -104,15 +69,17 @@ contains(RELEASE, 1) {
 
 !win32 {
 # for extra security against potential buffer overflows: enable GCCs Stack Smashing Protection
-QMAKE_CXXFLAGS *= -fstack-protector-all
-QMAKE_LFLAGS *= -fstack-protector-all
+QMAKE_CXXFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
+QMAKE_LFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
 # We need to exclude this for Windows cross compile with MinGW 4.2.x, as it will result in a non-working executable!
 # This can be enabled for Windows, when we switch to MinGW >= 4.4.x.
 }
 # for extra security on Windows: enable ASLR and DEP via GCC linker flags
 win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat
-win32:QMAKE_FLAGS *= -W1, --large-address-aware -static
-win32:QMAKE_LFLAGS += -static-libgcc -static-libstdc++
+#win32:QMAKE_CXXFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
+#win32:QMAKE_LFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
+#win32:QMAKE_FLAGS *= -W1, --large-address-aware -static
+#win32:QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 
 # use: qmake "USE_UPNP=1" ( enabled by default; default)
 #  or: qmake "USE_UPNP=0" (disabled by default)
@@ -413,12 +380,12 @@ OTHER_FILES += \
 
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
-   # macx:BOOST_LIB_SUFFIX = -mt
+    macx:BOOST_LIB_SUFFIX = -mt
    # windows:BOOST_LIB_SUFFIX = -mt
 }
 
 isEmpty(BOOST_THREAD_LIB_SUFFIX) {
-    #BOOST_THREAD_LIB_SUFFIX = $$BOOST_LIB_SUFFIX
+    BOOST_THREAD_LIB_SUFFIX = $$BOOST_LIB_SUFFIX
 }
 
 isEmpty(BDB_LIB_PATH) {
@@ -490,25 +457,9 @@ LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB
 LIBS += -lssl -lcrypto -ldb_cxx
 # -lgdi32 has to happen after -lcrypto (see  #681)
 windows:LIBS += -lws2_32 -lshlwapi -lmswsock -lole32 -loleaut32 -luuid -lgdi32
-#LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
-#windows:LIBS += -lboost_chrono$$BOOST_LIB_SUFFIX
+LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
+windows:LIBS += -lboost_chrono$$BOOST_LIB_SUFFIX
 
-win32-g++* {
-  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_chrono-mgw49-mt-s-1_55.a -lboost_chrono$$BOOST_LIB_SUFFIX
-  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_chrono-mgw49-mt-s-1_55.a -lboost_chrono$$BOOST_LIB_SUFFIX
-
-  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_filesystem-mgw49-mt-s-1_55.a -lboost_filesystem$$BOOST_LIB_SUFFIX
-  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_filesystem-mgw49-mt-s-1_55.a -lboost_filesystem$$BOOST_LIB_SUFFIX
-
-  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_program_options-mgw49-mt-s-1_55.a -lboost_program_options$$BOOST_LIB_SUFFIX
-  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_program_options-mgw49-mt-s-1_55.a -lboost_program_options$$BOOST_LIB_SUFFIX
-
-  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_system-mgw49-mt-s-1_55.a -lboost_system$$BOOST_LIB_SUFFIX
-  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_system-mgw49-mt-s-1_55.a -lboost_system$$BOOST_LIB_SUFFIX
-
-  LIBS           += $$join(BOOST_LIB_PATH,,-L,)/stage/lib/libboost_thread-mgw49-mt-s-1_55.a -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
-  #PRE_TARGETDEPS += $${BOOST_ROOT}/stage/lib/libboost_thread-mgw49-mt-s-1_55.a -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
-}
 
 
 contains(RELEASE, 1) {
@@ -523,4 +474,4 @@ contains(RELEASE, 1) {
     LIBS += -lrt -ldl
 }
 
-system($$QMAKE_LRELEASE $$_PRO_FILE_)
+system($$QMAKE_LRELEASE -silent $$_PRO_FILE_)

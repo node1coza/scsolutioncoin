@@ -23,7 +23,7 @@
       </sizepolicy>
      </property>
      <property name="pixmap">
-      <pixmap resource="../bitcoin.qrc">:/images/about</pixmap>
+      <pixmap resource="../../../scsolutioncoin.qrc">:/images/about</pixmap>
      </property>
     </widget>
    </item>
@@ -63,7 +63,7 @@
           <cursorShape>IBeamCursor</cursorShape>
          </property>
          <property name="text">
-          <string notr="true">0.3.666-beta</string>
+          <string notr="true">1.0.0.0</string>
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -94,6 +94,7 @@
         <string>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
 Copyright © 2014 The BlackCoin developers
+Copyright © 2014-2017 The OKCash Developers
 Copyright © 2014-2017 The Scsolutioncoin Developers</string>
        </property>
        <property name="textInteractionFlags">
@@ -107,15 +108,7 @@ Copyright © 2014-2017 The Scsolutioncoin Developers</string>
         <cursorShape>IBeamCursor</cursorShape>
        </property>
        <property name="text">
-        <string>
-Please contribute if you find Scsolutioncoin Core useful. Visit &lt;a href=&quot;https://scsolutioncoin.info&quot;&gt;https://scsolutioncoin.info&lt;/a&gt; for further information about the software.
-The source code is available from &lt;a href=&quot;https://github.com/scsolutioncoinpro/scsolutioncoin&quot;&gt;https://github.com/scsolutioncoinpro/scsolutioncoin&lt;/a&gt;.
-
-This is experimental software.
-
-Distributed under the MIT/X11 software license, see the accompanying file COPYING or &lt;a href=&quot;https://opensource.org/licenses/MIT&quot;&gt;https://opensource.org/licenses/MIT&lt;/a&gt;.
-
-This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please contribute if you find Scsolutioncoin Core useful. Visit &lt;a href=&quot;https://scsolutioncoin.net&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://scsolutioncoin.net&lt;/span&gt;&lt;/a&gt; for further information about the software. The source code is available from &lt;a href=&quot;https://github.com/node1coza/scsolutioncoin&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/node1coza/scsolutioncoin&lt;/span&gt;&lt;/a&gt;. This is experimental software. Distributed under the MIT/X11 software license, see the accompanying file COPYING or &lt;a href=&quot;https://opensource.org/licenses/MIT&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://opensource.org/licenses/MIT&lt;/span&gt;&lt;/a&gt;. This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://www.openssl.org/&lt;/span&gt;&lt;/a&gt;) and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::RichText</enum>
@@ -156,7 +149,7 @@ This product includes software developed by the OpenSSL Project for use in the O
   </layout>
  </widget>
  <resources>
-  <include location="../bitcoin.qrc"/>
+  <include location="../../../scsolutioncoin.qrc"/>
  </resources>
  <connections>
   <connection>

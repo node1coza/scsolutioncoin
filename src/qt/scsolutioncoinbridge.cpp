@@ -311,6 +311,8 @@ SCSolutionCoinBridge::SCSolutionCoinBridge(SCSolutionCoinGUI *window, QObject *p
 
 SCSolutionCoinBridge::~SCSolutionCoinBridge()
 {
+    thMessage->exit();
+    async->exit();
     delete transactionModel;
     delete addressModel;
     delete thMessage;
