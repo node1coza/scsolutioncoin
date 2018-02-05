@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = scsolutioncoin-1.0.0-qt
+TARGET = scsolutioncoin-1.0.0-qt-linux
 VERSION = 1.0.0.0
 INCLUDEPATH += src src/json src/qt
 DEFINES += BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
@@ -30,7 +30,7 @@ UI_DIR = build
 
 
     RESOURCES = scsolutioncoin.qrc
-
+win32{
 
     BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
     BOOST_INCLUDE_PATH=C:/deps/boost_1_55_0
@@ -52,7 +52,37 @@ UI_DIR = build
     #USE_UPNP=-
 
 
+}
 
+linux {
+
+    L += lboost_system
+    L += lboost_filesystem
+    L += lboost_thread
+    L += lboost_program_options
+    L += lboost_chrono
+
+
+    BOOST_LIB_SUFFIX=
+    BOOST_INCLUDE_PATH=/usr/include/boost
+    BOOST_LIB_PATH=/usr/lib/x86_64-linux-gnu
+
+    BDB_INCLUDE_PATH=/usr/include/
+    BDB_LIB_PATH=/usr/lib/x86_64-linux-gnu
+    OPENSSL_INCLUDE_PATH=/usr/include/openssl
+    OPENSSL_LIB_PATH=/usr/lib/x86_64-linux-gnu
+
+    MINIUPNPC_INCLUDE_PATH=/usr/include/miniupnpc
+    MINIUPNPC_LIB_PATH=c/usr/lib/x86_64-linux-gnu
+    QRENCODE_INCLUDE_PATH=/usr/include/
+    QRENCODE_LIB_PATH=/usr/lib/x86_64-linux-gnu
+
+        #USE_BUILD_INFO = 1
+        DEFINES += HAVE_BUILD_INFO
+
+    #USE_UPNP=-
+
+}
 
 
 # use: qmake "RELEASE=1"
