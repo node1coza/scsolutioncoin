@@ -326,7 +326,7 @@ void SCSolutionCoinBridge::setClientModel()
 
     info->insert("version", CLIENT_VERSION);
     info->insert("build",   window->clientModel->formatFullVersion());
-    info->insert("date",    window->clientModel->formatBuildDate());
+    //info->insert("date",    window->clientModel->formatBuildDate());
     info->insert("name",    window->clientModel->clientName());
 
     populateOptions();
