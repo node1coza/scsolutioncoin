@@ -49,7 +49,7 @@ int64_t CChainParams::GetProofOfWorkReward(int nHeight, int64_t nFees) const
         nSubsidy =  100000000 * COIN;
     if (nHeight == 5)
         nSubsidy =  100000000 * COIN;
-    if (nHeight <= 81)
+    if (nHeight > 5 && nHeight <= 81)
         nSubsidy = 10 * COIN;
 
  //   else
