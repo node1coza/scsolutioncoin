@@ -1,6 +1,6 @@
 TEMPLATE = app
-TARGET = scsolutioncoin-1.0.0-qt-linux
-VERSION = 1.0.0.0
+TARGET = scsolutioncoin-qt-win32-1.0.6.2
+VERSION = 1.0.6.2
 INCLUDEPATH += src src/json src/qt
 DEFINES += BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd

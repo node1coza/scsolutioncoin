@@ -31,7 +31,6 @@
         <file alias="filesave">src/qt/res/icons/filesave.png</file>
         <file alias="debugwindow">src/qt/res/icons/debugwindow.png</file>
         <file alias="search">src/qt/res/icons/search_icon.png</file>
-        <file alias="nav_icons">src/qt/res/icons/nav_icons.png</file>
         <file alias="delete">src/qt/res/icons/delete.png</file>
         <file alias="favorite">src/qt/res/icons/favorite.png</file>
         <file alias="favorited">src/qt/res/icons/favorited.png</file>
@@ -39,6 +38,7 @@
         <file alias="history">src/qt/res/icons/history.png</file>
         <file alias="syncing">src/qt/res/icons/syncing.gif</file>
         <file alias="syncing_static">src/qt/res/icons/syncing_static.gif</file>
+        <file alias="nav_icons">src/qt/res/icons/nav_icons1.png</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="about">src/qt/res/images/about.png</file>

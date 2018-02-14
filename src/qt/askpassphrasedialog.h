@@ -25,11 +25,12 @@ public:
     };
 
     explicit AskPassphraseDialog(Mode mode, QWidget *parent = 0);
-    ~AskPassphraseDialog();
+
 
     void accept();
-
+    ~AskPassphraseDialog();
     void setModel(WalletModel *model);
+
 
 private:
     Ui::AskPassphraseDialog *ui;

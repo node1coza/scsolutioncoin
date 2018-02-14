@@ -1106,8 +1106,17 @@ void ClearDatadirCache()
 
 boost::filesystem::path GetConfigFile()
 {
+
+
     boost::filesystem::path pathConfigFile(GetArg("-conf", "scsolutioncoin.conf"));
-    if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir(false) / pathConfigFile;
+    //if (!pathConfigFile.is_complete())
+    //{
+    //    pathConfigFile = GetDataDir(false) / pathConfigFile;
+    //}
+    //else
+    //{
+    //    pathConfigFile = pathConfigFile;
+    //}
     return pathConfigFile;
 }
 

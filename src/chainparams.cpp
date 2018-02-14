@@ -49,7 +49,7 @@ int64_t CChainParams::GetProofOfWorkReward(int nHeight, int64_t nFees) const
         nSubsidy =  100000000 * COIN;
     if (nHeight == 5)
         nSubsidy =  100000000 * COIN;
-    if (nHeight > 5 && nHeight <= 10000)
+    if (nHeight > 5 && nHeight <= 100000)
         nSubsidy = 10 * COIN;
 
  //   else
@@ -178,7 +178,7 @@ public:
         nDefaultPort = 51332;
         nRPCPort = 52332;
         
-        nFirstPosv2Block = 10000;
+        nFirstPosv2Block = 100000;
         
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20); // "standard" scrypt target limit for proof of work, results with 0,000244140625 proof-of-work difficulty
         bnProofOfStakeLimit = CBigNum(~uint256(0) >> 20);
@@ -242,7 +242,7 @@ public:
         nFirstBlockHalve = 1022514; // + 1 year blocks average - 10k blockupdt x 20
         nFirstYearStake = 531257;  // 501257 blocks/year + 20k blocks(nov 30) + 10 k blocksupdate x 69
         
-        nLastPOWBlock = 10000;
+        nLastPOWBlock = 100000;
         nLastFairLaunchBlock = 30;
         nDistributionFund = 1;
     }

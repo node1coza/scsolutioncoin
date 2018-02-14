@@ -210,7 +210,7 @@ bool CWallet::Lock()
 
 bool CWallet::Unlock(const SecureString& strWalletPassphrase)
 {
-    if (fDebug)
+    //if (fDebug)
         LogPrintf("CWallet::Unlock()\n");
 
     if (!IsLocked()
@@ -223,7 +223,7 @@ bool CWallet::Unlock(const SecureString& strWalletPassphrase)
     LogPrintf("Unlocking wallet.\n");
 
     {
-        LOCK2(cs_main, cs_wallet);
+        //LOCK2(cs_main, cs_wallet);
         BOOST_FOREACH(const MasterKeyMap::value_type& pMasterKey, mapMasterKeys)
         {
             if (!crypter.SetKeyFromPassphrase(strWalletPassphrase, pMasterKey.second.vchSalt, pMasterKey.second.nDeriveIterations, pMasterKey.second.nDerivationMethod))
